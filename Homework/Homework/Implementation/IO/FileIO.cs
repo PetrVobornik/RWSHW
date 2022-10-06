@@ -1,9 +1,13 @@
-﻿using Moravia.Homework.Interfaces;
+﻿using Moravia.Homework.Implementation.Reflection;
+using Moravia.Homework.Interfaces;
 
 namespace Moravia.Homework.Implementation.IO;
 
+[DataChanger("FILE")]
 public class FileIO : IDataInput, IDataOutput
 {
+    public FileIO() { }
+
     public Task<Stream> OpenSourceStream(string source)
     {
         if (!File.Exists(source))

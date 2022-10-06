@@ -1,9 +1,11 @@
-﻿using Moravia.Homework.Interfaces;
+﻿using Moravia.Homework.Implementation.Reflection;
+using Moravia.Homework.Interfaces;
 using System.Xml.Linq;
 
 namespace Moravia.Homework.Implementation.LS;
 
-public class XmlRW : IDataDeserializer, IDataSerializer
+[DataChanger("XML")]
+public class XmlSD : IDataDeserializer, IDataSerializer
 {
     public async Task<IDataDocument> Deserialize(Stream source)
     {

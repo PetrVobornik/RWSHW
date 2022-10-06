@@ -2,7 +2,7 @@
 
 namespace Moravia.Homework.Interfaces
 {
-    internal class DocumentHelper : IDataDocument
+    public class DocumentHelper : IDataDocument
     {
         public string Title { get; set; }
         public string Text { get; set; }
