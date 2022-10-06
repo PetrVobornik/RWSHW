@@ -38,14 +38,14 @@ public class DocumentWorker : IDocumentWorker
     public async Task<IDataDocument> Load()
     {
         CheckParams(forGet: true);
-        using (var sourceStream = DataInput.OpenSourceStream(DataSource))
+        using (var sourceStream = await DataInput.OpenSourceStream(DataSource))
             return await DataDeserializer.Deserialize(sourceStream);
     }
 
     public async Task Save(IDataDocument doc)
     {
         CheckParams(forSet: true);
-        using (var targetStream = DataOutput.OpenTargetStream(DataTarget))
+        using (var targetStream = await DataOutput.OpenTargetStream(DataTarget))
             await DataSerializer.Serialize(doc, targetStream);
     }
 

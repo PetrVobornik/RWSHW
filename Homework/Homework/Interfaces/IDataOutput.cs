@@ -2,5 +2,5 @@
 
 public interface IDataOutput
 {
-    Stream OpenTargetStream(string target);
+    Task<Stream> OpenTargetStream(string target);
 }

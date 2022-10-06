@@ -2,7 +2,7 @@
 
 public interface IDataInput
 {
-    Stream OpenSourceStream(string source);
+    Task<Stream> OpenSourceStream(string source);
 }
 
 

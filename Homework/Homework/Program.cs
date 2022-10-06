@@ -16,6 +16,8 @@ class Program
         var dw = new DocumentWorker() {
             DataSource = sourceFileName,
             DataInput = new FileIO(),
+            //DataSource = "https://programko.net/rwshw.xml",
+            //DataInput = new HttpI(),
             DataDeserializer = new XmlRW(),
             DataTarget = targetFileName,
             DataSerializer = new JsonRW(),
