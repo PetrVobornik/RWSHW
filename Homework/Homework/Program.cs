@@ -1,55 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
+using Moravia.Homework.Implementation.Doc;
+using Moravia.Homework.Implementation.IO;
+using Moravia.Homework.Implementation.LS;
 using Newtonsoft.Json;
 
-namespace Moravia.Homework
+namespace Moravia.Homework;
+
+class Program
 {
-    public class Document
+    static void Main(string[] args)
     {
-        public string Title { get; set; }
-        public string Text { get; set; }
-    }
+        var sourceFileName = args.Length > 0 ? args[0] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Source Files\\Document1.xml");
+        var targetFileName = args.Length > 1 ? args[1] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Target Files\\Document1.json");
 
-    class Program
-    {
-        static void Main(string[] args)
+        var dw = new DocumentWorker() {
+            DataSource = sourceFileName,
+            DataInput = new FileIO(),
+            DataDeserializer = new XmlRW(),
+            DataTarget = targetFileName,
+            DataSerializer = new JsonRW(),
+            DataOutput = new FileIO(),
+        };
+
+        try
         {
-            var sourceFileName = args.Length > 0 ? args[0] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Source Files\\Document1.xml");
-            var targetFileName = args.Length > 1 ? args[1] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Target Files\\Document1.json");
-
-            if (!File.Exists(sourceFileName))
-            {
-                Console.WriteLine($"File '{sourceFileName}' not found");
-                return;
-            }
-
-            string errorMessage = "Error";
-            try
-            {
-                errorMessage = "An error occurred while reading the source data";
-                XDocument xdoc;
-                using (var reader = new StreamReader(sourceFileName))
-                    xdoc = XDocument.Load(reader);
-
-                var doc = new Document
-                {
-                    Title = xdoc?.Root?.Element("title")?.Value,
-                    Text = xdoc?.Root?.Element("text")?.Value
-                };
-
-                var serializedDoc = JsonConvert.SerializeObject(doc);
-
-                errorMessage = "An error occurred while writing the result";
-                using (var sw = new StreamWriter(targetFileName))
-                    sw.Write(serializedDoc);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{0}: {1}", errorMessage, ex.Message);
-                throw;
-            }
+            dw.LoadAndSave().Wait();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: {0}", ex.Message);
+            throw;
         }
     }
 }
