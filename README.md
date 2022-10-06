@@ -25,3 +25,9 @@ We’re going to appraise the design of given code that should match the **quali
 Tests should be written as demonstration of your skills, there is no need to cover everything.
 
 Please version progress as usual, upload your homework to GitHub or other preferred git storage and send us link. Alternatively, use git archive and send us a ZIP archive.
+
+
+## Solution
+
+1. [code-correction.pdf](code-correction.pdf)
+
