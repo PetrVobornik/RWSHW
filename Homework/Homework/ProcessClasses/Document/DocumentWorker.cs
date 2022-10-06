@@ -1,8 +1,8 @@
 ﻿using Moravia.Homework.Interfaces;
 
-namespace Moravia.Homework.Implementation.Doc;
+namespace Moravia.Homework.ProcessClasses.Document;
 
-public class DocumentWorker : IDocumentWorker
+internal class DocumentWorker : IDocumentWorker
 {
     #region Properties
 

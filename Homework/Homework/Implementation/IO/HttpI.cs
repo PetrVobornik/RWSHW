@@ -1,5 +1,5 @@
-﻿using Moravia.Homework.Implementation.Reflection;
-using Moravia.Homework.Interfaces;
+﻿using Moravia.Homework.Interfaces;
+using Moravia.Homework.ProcessClasses.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Linq;

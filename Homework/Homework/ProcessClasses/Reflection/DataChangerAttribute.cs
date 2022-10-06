@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Moravia.Homework.Implementation.Reflection;
+namespace Moravia.Homework.ProcessClasses.Reflection;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class DataChangerAttribute : Attribute

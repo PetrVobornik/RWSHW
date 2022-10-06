@@ -1,0 +1,13 @@
+{
+  "DataChangers": {
+    "DataSource": "..\\..\\..\\Source Files\\Document1.xml",
+    "DataInputName": "FILE",
+    "DataDeserializerName": "XML",
+    //"DataSource": "https://programko.net/rwshw.xml",
+    //"DataInputName": "HTTP",
+
+    "DataSerializerName": "JSON",
+    "DataOutputName": "FILE",
+    "DataTarget": "..\\..\\..\\Target Files\\Document1.json"
+  }
+}

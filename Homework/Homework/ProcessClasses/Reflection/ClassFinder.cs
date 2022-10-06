@@ -1,5 +1,5 @@
-﻿using Moravia.Homework.Implementation.Reflection;
-using Moravia.Homework.Interfaces;
+﻿using Moravia.Homework.Interfaces;
+using Moravia.Homework.ProcessClasses.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework.Implementation.Reflection;
+namespace Homework.ProcessClasses.Reflection;
 
 internal class ClassFinder : IDisposable
 {

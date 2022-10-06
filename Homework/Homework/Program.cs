@@ -1,9 +1,11 @@
 ﻿using System.Xml.Linq;
-using Homework.Implementation.Reflection;
-using Moravia.Homework.Implementation.Doc;
+using Homework.ProcessClasses.Configuration;
+using Homework.ProcessClasses.Reflection;
+using Microsoft.Extensions.Configuration;
 using Moravia.Homework.Implementation.IO;
 using Moravia.Homework.Implementation.LS;
 using Moravia.Homework.Interfaces;
+using Moravia.Homework.ProcessClasses.Document;
 using Newtonsoft.Json;
 
 namespace Moravia.Homework;
@@ -12,21 +14,22 @@ class Program
 {
     static void Main(string[] args)
     {
-        var sourceFileName = args.Length > 0 ? args[0] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Source Files\\Document1.xml");
-        var targetFileName = args.Length > 1 ? args[1] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Target Files\\Document1.json");
+        var builder = new ConfigurationBuilder()
+              .SetBasePath(Environment.CurrentDirectory)
+              .AddJsonFile("config.json", optional: false);
+
+        var config = builder.Build().GetSection("DataChangers").Get<Configuration>();
 
         using var cf = new ClassFinder();
         cf.Initialize();        
 
-        var dw = new DocumentWorker() {
-            DataSource = sourceFileName,
-            DataInput = cf.GetInstanceByName<IDataInput>("FILE"),
-            //DataSource = "https://programko.net/rwshw.xml",
-            //DataInput = cf.GetInstanceByName<IDataInput>("HTTP"),
-            DataDeserializer = cf.GetInstanceByName<IDataDeserializer>("XML"),
-            DataTarget = targetFileName,
-            DataSerializer = cf.GetInstanceByName<IDataSerializer>("JSON"),
-            DataOutput = cf.GetInstanceByName<IDataOutput>("FILE"),
+        var dw = new DocumentWorker {
+            DataSource = config.DataSource,
+            DataInput = cf.GetInstanceByName<IDataInput>(config.DataInputName),
+            DataDeserializer = cf.GetInstanceByName<IDataDeserializer>(config.DataDeserializerName),
+            DataTarget = config.DataTarget,
+            DataSerializer = cf.GetInstanceByName<IDataSerializer>(config.DataSerializerName),
+            DataOutput = cf.GetInstanceByName<IDataOutput>(config.DataOutputName),
         };
 
         try
