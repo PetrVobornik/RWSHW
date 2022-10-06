@@ -11,32 +11,43 @@ namespace Moravia.Homework
         public string Title { get; set; }
         public string Text { get; set; }
     }
+
     class Program
     {
         static void Main(string[] args)
         {
-            var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Source Files\\Document1.xml");
-            var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Target Files\\Document1.json");
-        try
+            var sourceFileName = args.Length > 0 ? args[0] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Source Files\\Document1.xml");
+            var targetFileName = args.Length > 1 ? args[1] : Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\Target Files\\Document1.json");
+
+            if (!File.Exists(sourceFileName))
             {
-                FileStream sourceStream = File.Open(sourceFileName, FileMode.Open);
-                var reader = new StreamReader(sourceStream);
-                string input = reader.ReadToEnd();
+                Console.WriteLine($"File '{sourceFileName}' not found");
+                return;
+            }
+
+            string input;
+            try
+            {
+                using (var reader = new StreamReader(sourceFileName))
+                    input = reader.ReadToEnd();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                Console.WriteLine($"An error occurred while reading the source data: {0}", ex.Message);
+                throw;
             }
+
             var xdoc = XDocument.Parse(input);
             var doc = new Document
             {
-                Title = xdoc.Root.Element("title").Value,
-                Text = xdoc.Root.Element("text").Value
+                Title = xdoc.Root.Element("title")?.Value,
+                Text = xdoc.Root.Element("text")?.Value
             };
+
             var serializedDoc = JsonConvert.SerializeObject(doc);
-            var targetStream = File.Open(targetFileName, FileMode.Create, FileAccess.Write);
-            var sw = new StreamWriter(targetStream);
-            sw.Write(serializedDoc);
+
+            using (var sw = new StreamWriter(targetFileName))
+                sw.Write(serializedDoc);
         }
     }
 }
