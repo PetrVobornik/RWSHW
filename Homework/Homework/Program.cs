@@ -29,16 +29,14 @@ namespace Moravia.Homework
             try
             {
                 errorMessage = "An error occurred while reading the source data";
-                string input;
+                XDocument xdoc;
                 using (var reader = new StreamReader(sourceFileName))
-                    input = reader.ReadToEnd();
+                    xdoc = XDocument.Load(reader);
 
-                errorMessage = "An error occurred during the processing of the retrieved data";
-                var xdoc = XDocument.Parse(input);
                 var doc = new Document
                 {
-                    Title = xdoc.Root.Element("title")?.Value,
-                    Text = xdoc.Root.Element("text")?.Value
+                    Title = xdoc?.Root?.Element("title")?.Value,
+                    Text = xdoc?.Root?.Element("text")?.Value
                 };
 
                 var serializedDoc = JsonConvert.SerializeObject(doc);
