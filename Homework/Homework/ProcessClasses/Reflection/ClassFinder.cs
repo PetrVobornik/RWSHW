@@ -31,7 +31,7 @@ internal class ClassFinder : IDisposable
             assembly = Assembly.GetExecutingAssembly();
 
         dataChangerClasses = assembly.GetTypes()
-            .Where(t => 
+            .Where(t =>
                 t.IsClass &&
                 t.IsDefined(typeof(DataChangerAttribute)) &&
                 t.GetInterfaces().Any(i =>
@@ -55,7 +55,7 @@ internal class ClassFinder : IDisposable
         throw new Exception($"Data changer class with name '{name}' not found");
     }
 
-    public T GetInstanceByName<T>(string name) 
+    public T GetInstanceByName<T>(string name)
     {
         object obj;
         if (!dataChangerCache.TryGetValue(name, out obj))
@@ -66,6 +66,19 @@ internal class ClassFinder : IDisposable
         if (obj is not T)
             throw new Exception($"Type '{obj.GetType().Name}' is not subclass of '{typeof(T).Name}'.");
         return (T)obj;
+    }
+
+    public string[] GetNamesForInterface<T>()
+    {
+        if (dataChangerClasses is null)
+            Initialize();
+
+        string fullName = typeof(T).FullName;
+
+        return dataChangerClasses
+            .Where(t => t.Value.GetInterfaces().Any(i => fullName == i.FullName))
+            .Select(x => x.Key)
+            .ToArray();
     }
 
     public void Dispose()
