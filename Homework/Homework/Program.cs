@@ -25,29 +25,33 @@ namespace Moravia.Homework
                 return;
             }
 
-            string input;
+            string errorMessage = "Error";
             try
             {
+                errorMessage = "An error occurred while reading the source data";
+                string input;
                 using (var reader = new StreamReader(sourceFileName))
                     input = reader.ReadToEnd();
+
+                errorMessage = "An error occurred during the processing of the retrieved data";
+                var xdoc = XDocument.Parse(input);
+                var doc = new Document
+                {
+                    Title = xdoc.Root.Element("title")?.Value,
+                    Text = xdoc.Root.Element("text")?.Value
+                };
+
+                var serializedDoc = JsonConvert.SerializeObject(doc);
+
+                errorMessage = "An error occurred while writing the result";
+                using (var sw = new StreamWriter(targetFileName))
+                    sw.Write(serializedDoc);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred while reading the source data: {0}", ex.Message);
+                Console.WriteLine($"{0}: {1}", errorMessage, ex.Message);
                 throw;
             }
-
-            var xdoc = XDocument.Parse(input);
-            var doc = new Document
-            {
-                Title = xdoc.Root.Element("title")?.Value,
-                Text = xdoc.Root.Element("text")?.Value
-            };
-
-            var serializedDoc = JsonConvert.SerializeObject(doc);
-
-            using (var sw = new StreamWriter(targetFileName))
-                sw.Write(serializedDoc);
         }
     }
 }
