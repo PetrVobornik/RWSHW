@@ -29,5 +29,16 @@ Please version progress as usual, upload your homework to GitHub or other prefer
 
 ## Solution
 
-1. [code-correction.pdf](code-correction.pdf)
+1. Done: [code-correction.pdf](code-correction.pdf)
 
+2. In progress...
+
+   a. Done
+
+   b. Done
+
+   c. In progress...
+
+   d. Done
+
+   e. Done
