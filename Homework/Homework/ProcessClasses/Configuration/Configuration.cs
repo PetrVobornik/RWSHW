@@ -1,5 +1,8 @@
 ﻿namespace Homework.ProcessClasses.Configuration;
 
+/// <summary>
+/// Data object for loading configuration from config.json
+/// </summary>
 internal class Configuration
 {
     public string DataSource { get; set; }

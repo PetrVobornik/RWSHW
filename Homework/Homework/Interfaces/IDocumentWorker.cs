@@ -1,6 +1,9 @@
 ﻿namespace Moravia.Homework.Interfaces;
 
-public interface IDocumentWorker : IDocumentGetter, IDocumentSetter
+/// <summary>
+/// Interface for a class that will load and save data
+/// </summary>
+public interface IDocumentWorker : IDocumentLoader, IDocumentSaver
 {
     Task LoadAndSave();
 }

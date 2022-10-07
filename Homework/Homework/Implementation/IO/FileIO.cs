@@ -3,6 +3,9 @@ using Moravia.Homework.ProcessClasses.Reflection;
 
 namespace Moravia.Homework.Implementation.IO;
 
+/// <summary>
+/// Class for reading and saving data from/to a local file
+/// </summary>
 [DataChanger("FILE")]
 public class FileIO : IDataInput, IDataOutput
 {

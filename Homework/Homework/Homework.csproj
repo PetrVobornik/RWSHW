@@ -5,7 +5,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
-    <AssemblyName>Moravia.Homework</AssemblyName>
+    <AssemblyName>Homework</AssemblyName>
+    <RootNamespace>Moravia.Homework</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

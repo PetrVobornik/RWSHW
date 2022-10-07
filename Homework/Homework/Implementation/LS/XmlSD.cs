@@ -4,6 +4,9 @@ using System.Xml.Linq;
 
 namespace Moravia.Homework.Implementation.LS;
 
+/// <summary>
+/// Class for serialization and deserialization of data from/to XML format
+/// </summary>
 [DataChanger("XML")]
 public class XmlSD : IDataDeserializer, IDataSerializer
 {

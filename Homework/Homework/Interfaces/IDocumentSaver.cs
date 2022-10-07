@@ -1,6 +1,9 @@
 ﻿namespace Moravia.Homework.Interfaces;
 
-public interface IDocumentSetter
+/// <summary>
+/// Interface for the class that will save data
+/// </summary>
+public interface IDocumentSaver
 {
     string DataTarget { get; set; }
     IDataOutput DataOutput { get; set; }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Moravia.Homework.ProcessClasses.Reflection;
 
-namespace Moravia.Homework.ProcessClasses.Reflection;
-
+/// <summary>
+/// An attribute to identify and specify a unique name for classes 
+/// that process data in one of four phases
+/// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class DataChangerAttribute : Attribute
 {

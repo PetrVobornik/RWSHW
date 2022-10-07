@@ -1,16 +1,12 @@
 ﻿using Moravia.Homework.Interfaces;
 using Moravia.Homework.ProcessClasses.Reflection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Moravia.Homework.Implementation.LS;
 
+/// <summary>
+/// Class for serialization and deserialization of data from/to JSON format
+/// </summary>
 [DataChanger("JSON")]
 public class JsonSD : IDataDeserializer, IDataSerializer
 {
