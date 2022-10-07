@@ -31,13 +31,13 @@ Please version progress as usual, upload your homework to GitHub or other prefer
 
 1. Done: [code-correction.pdf](code-correction.pdf)
 
-2. In progress...
+2. Done
 
    a. Done
 
    b. Done
 
-   c. In progress...
+   c. Done
 
    d. Done
 

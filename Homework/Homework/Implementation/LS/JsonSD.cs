@@ -10,24 +10,23 @@ namespace Moravia.Homework.Implementation.LS;
 [DataChanger("JSON")]
 public class JsonSD : IDataDeserializer, IDataSerializer
 {
-    public async Task<IDataDocument> Deserialize(Stream source)
+    public Task<IDataDocument> Deserialize(Stream source)
     {
         using (var sr = new StreamReader(source))
         using (var jtr = new JsonTextReader(sr))
         {
             var serializer = new JsonSerializer();
-            return serializer.Deserialize<DocumentHelper>(jtr);
+            return Task.FromResult<IDataDocument>(serializer.Deserialize<DocumentHelper>(jtr));
         }
     }
 
-    public async Task Serialize(IDataDocument document, Stream target)
+    public Task Serialize(IDataDocument document, Stream target)
     {
-        using (var sw = new StreamWriter(target))
-        using (JsonTextWriter jtw = new JsonTextWriter(sw))
-        {
-            var ser = new JsonSerializer();
-            ser.Serialize(jtw, document);
-            jtw.Flush();
-        }
+        var sw = new StreamWriter(target);
+        JsonTextWriter jtw = new JsonTextWriter(sw);
+        var ser = new JsonSerializer();
+        ser.Serialize(jtw, document);
+        jtw.Flush();
+        return Task.CompletedTask;
     }
 }
