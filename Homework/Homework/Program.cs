@@ -1,5 +1,5 @@
-﻿using Homework.ProcessClasses.Configuration;
-using Homework.ProcessClasses.Reflection;
+﻿using Moravia.Homework.ProcessClasses.Configuration;
+using Moravia.Homework.ProcessClasses.Reflection;
 using Microsoft.Extensions.Configuration;
 using Moravia.Homework.Interfaces;
 using Moravia.Homework.ProcessClasses.Document;
@@ -22,35 +22,31 @@ cf.Initialize();
 
 #region Console input arguments
 
-app.HelpOption(); // Support for "--help" command
+app.HelpOption(); // Support for "-h" or "--help" command
 
 // DataSource
 var argDataSource = app.Option<string>("-src|--Source <DATASOURCE>", "Path/Uri... to the source", CommandOptionType.SingleValue);
 argDataSource.DefaultValue = config.DataSource;
 
 // DataInput
-var dInputNames = cf.GetNamesForInterface<IDataInput>();
 var argDataInput = app.Option<string>("-di|--DataInput <DATAINPUT>", $"Input data loader", CommandOptionType.SingleValue);
 argDataInput.DefaultValue = config.DataInputName;
-argDataInput.Accepts().Values(dInputNames);
+argDataInput.Accepts().Values(cf.GetNamesForInterface<IDataInput>());
 
 // DataDeserializer
-var dDeserializerNames = cf.GetNamesForInterface<IDataDeserializer>();
 var argDataDeserializer = app.Option<string>("-dd|--DataDeserializer <DATADESERIALIZER>", $"Data deserializer", CommandOptionType.SingleValue);
 argDataDeserializer.DefaultValue = config.DataDeserializerName;
-argDataDeserializer.Accepts().Values(dDeserializerNames);
+argDataDeserializer.Accepts().Values(cf.GetNamesForInterface<IDataDeserializer>());
 
 // DataSerializer
-var dSerializerNames = cf.GetNamesForInterface<IDataSerializer>();
 var argDataSerializer = app.Option<string>("-ds|--DataSerializer <DATASERIALIZER>", $"Data serializer", CommandOptionType.SingleValue);
 argDataSerializer.DefaultValue = config.DataSerializerName;
-argDataSerializer.Accepts().Values(dSerializerNames);
+argDataSerializer.Accepts().Values(cf.GetNamesForInterface<IDataSerializer>());
 
 // DataOutput
-var dOutputNames = cf.GetNamesForInterface<IDataOutput>();
 var argDataOutput = app.Option<string>("-do|--DataOutput <DATAOUTPUT>", $"Output data storer", CommandOptionType.SingleValue);
 argDataOutput.DefaultValue = config.DataOutputName;
-argDataOutput.Accepts().Values(dOutputNames);
+argDataOutput.Accepts().Values(cf.GetNamesForInterface<IDataOutput>());
 
 // DataTarget
 var argDataTarget = app.Option<string>("-trg|--Target <DATASOURCE>", "Path/Uri... for saving the output", CommandOptionType.SingleValue);

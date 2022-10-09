@@ -1,4 +1,4 @@
-﻿namespace Homework.ProcessClasses.Configuration;
+﻿namespace Moravia.Homework.ProcessClasses.Configuration;
 
 /// <summary>
 /// Data object for loading configuration from config.json

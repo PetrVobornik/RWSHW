@@ -1,9 +1,8 @@
 ﻿using Moravia.Homework.Interfaces;
-using Moravia.Homework.ProcessClasses.Reflection;
 using System.Data;
 using System.Reflection;
 
-namespace Homework.ProcessClasses.Reflection;
+namespace Moravia.Homework.ProcessClasses.Reflection;
 
 /// <summary>
 /// Helper class for work with reflection
